@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Подстригашка — парикмахерская | Стрижки, окрашивание, наращивание</title>
+<meta name="description" content="Парикмахерская «Подстригашка»: профессиональные стрижки, окрашивание и наращивание волос. Уютная атмосфера, стерильные инструменты, чай и кофе для гостей. Запишитесь онлайн!">
+
+<!-- Подключение шрифтов Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<!-- Иконки Font Awesome (CDN) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+/* ============================================================
+   ПОДСТРИГАШКА — лендинг парикмахерской
+   Палитра: тёплый кремовый фон, кофейно-графитовые акценты,
+   пыльно-розовый акцент
+   ============================================================ */
+:root {
+    --bg:          #faf5f0;   /* основной фон — тёплый кремовый */
+    --bg-soft:     #f3e9e2;   /* мягкий фон для секций */
+    --ink:         #2e2622;   /* глубокий тёмно-серый/кофейный текст */
+    --ink-soft:    #6f6159;   /* приглушённый текст */
+    --accent:      #b76e63;   /* пыльно-розовый акцент */
+    --accent-dark: #8f4f46;   /* тёмный акцент (hover) */
+    --card:        #ffffff;   /* карточки */
+    --radius:      18px;
+    --shadow:      0 10px 30px rgba(46, 38, 34, .08);
+    --shadow-lg:   0 20px 50px rgba(46, 38, 34, .14);
+    --container:   1180px;
+}
+
+/* ---------- Базовые стили ---------- */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; } /* плавная прокрутка к якорям */
+
+body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+    width: min(var(--container), 92%);
+    margin-inline: auto;
+}
+
+section { padding: 90px 0; }
+
+/* ---------- Кнопки ---------- */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 32px;
+    border: none;
+    border-radius: 50px;
+    background: var(--accent);
+    color: #fff;
+    font-family: 'Manrope', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background .25s ease, transform .25s ease, box-shadow .25s ease;
+    box-shadow: 0 8px 20px rgba(183, 110, 99, .35);
+}
+.btn:hover { background: var(--accent-dark); transform: translateY(-2px); box-shadow: 0 12px 26px rgba(143, 79, 70, .4); }
+.btn:active { transform: translateY(0); }
+
+.btn--ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    box-shadow: none;
+}
+.btn--ghost:hover { background: var(--ink); color: var(--bg); }
+
+/* ---------- Шапка ---------- */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250, 245, 240, .85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(46, 38, 34, .07);
+    transition: box-shadow .3s ease;
+}
+.header.scrolled { box-shadow: 0 6px 24px rgba(46, 38, 34, .08); }
+
+.header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding: 14px 0;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+.logo i { color: var(--accent); }
+
+.nav { display: flex; gap: 28px; }
+.nav a {
+    font-weight: 600;
+    font-size: .95rem;
+    color: var(--ink-soft);
+    transition: color .2s;
+}
+.nav a:hover { color: var(--accent-dark); }
+
+.header__contacts { display: flex; align-items: center; gap: 22px; }
+.header__phone {
+    font-weight: 800;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.header__phone i { color: var(--accent); }
+.header__phone:hover { color: var(--accent-dark); }
+
+.header__btn { padding: 11px 24px; font-size: .92rem; }
+
+/* Бургер-меню (мобильные) */
+.burger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+}
+.burger span {
+    width: 26px; height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform .3s, opacity .3s;
+}
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- Hero ---------- */
+.hero {
+    padding: 80px 0 100px;
+    background:
+        radial-gradient(700px 400px at 85% 10%, rgba(183, 110, 99, .12), transparent 60%),
+        radial-gradient(500px 400px at 5% 90%, rgba(183, 110, 99, .08), transparent 60%);
+}
+
+.hero__grid {
+    display: grid;
+    grid-template-columns: 1.1fr .9fr;
+    align-items: center;
+    gap: 60px;
+}
+
+.hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card);
+    border: 1px solid rgba(183, 110, 99, .25);
+    color: var(--accent-dark);
+    padding: 8px 18px;
+    border-radius: 50px;
+    font-size: .85rem;
+    font-weight: 700;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.hero h1 em { font-style: italic; color: var(--accent-dark); }
+
+.hero__sub {
+    font-size: 1.15rem;
+    color: var(--ink-soft);
+    max-width: 520px;
+    margin-bottom: 36px;
+}
+
+.hero__actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; }
+
+.hero__meta {
+    margin-top: 40px;
+    display: flex;
+    gap: 36px;
+    flex-wrap: wrap;
+}
+.hero__meta div { display: flex; align-items: center; gap: 10px; color: var(--ink-soft); font-weight: 600; font-size: .95rem; }
+.hero__meta i { color: var(--accent); font-size: 1.2rem; }
+
+/* Фотография героя с «плавающей» карточкой */
+.hero__media { position: relative; }
+.hero__media img {
+    border-radius: 28px;
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    width: 100%;
+}
+.hero__card {
+    position: absolute;
+    bottom: -24px;
+    left: -24px;
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.hero__card .stars { color: #e8a13c; letter-spacing: 2px; }
+.hero__card strong { display: block; font-size: 1.05rem; }
+.hero__card small { color: var(--ink-soft); }
+
+/* ---------- Заголовки секций ---------- */
+.section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+.section-head .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: .8rem;
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 12px;
+}
+.section-head h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 14px; }
+.section-head p { color: var(--ink-soft); }
+
+/* ---------- Услуги ---------- */
+.services { background: var(--bg-soft); }
+
+.services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+}
+
+.service-card {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+.service-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+
+.service-card__img { position: relative; overflow: hidden; }
+.service-card__img img {
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    width: 100%;
+    transition: transform .5s ease;
+}
+.service-card:hover .service-card__img img { transform: scale(1.06); }
+
+.service-card__price-tag {
+    position: absolute;
+    top: 14px; right: 14px;
+    background: rgba(46, 38, 34, .85);
+    color: #fff;
+    backdrop-filter: blur(4px);
+    padding: 7px 16px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: .9rem;
+}
+
+.service-card__body { padding: 26px; display: flex; flex-direction: column; flex: 1; }
+.service-card__icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    background: rgba(183, 110, 99, .12);
+    color: var(--accent-dark);
+    display: grid;
+    place-items: center;
+    font-size: 1.3rem;
+    margin-bottom: 18px;
+}
+.service-card h3 { font-size: 1.35rem; margin-bottom: 10px; }
+.service-card p { color: var(--ink-soft); font-size: .95rem; flex: 1; }
+
+.service-card__footer {
+    margin-top: 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.service-card__time { color: var(--ink-soft); font-size: .88rem; font-weight: 600; }
+.service-card__link {
+    color: var(--accent-dark);
+    font-weight: 800;
+    font-size: .95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: none; border: none; font-family: inherit;
+    transition: gap .25s;
+}
+.service-card__link:hover { gap: 12px; }
+
+/* ---------- О нас ---------- */
+.about__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+}
+
+.about__media { position: relative; }
+.about__media img {
+    border-radius: 28px;
+    box-shadow: var(--shadow-lg);
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    width: 100%;
+}
+.about__media::before {
+    content: '';
+    position: absolute;
+    inset: 24px -24px -24px 24px;
+    background: rgba(183, 110, 99, .15);
+    border-radius: 28px;
+    z-index: -1;
+}
+
+.about h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); margin-bottom: 20px; }
+.about p { color: var(--ink-soft); margin-bottom: 16px; }
+
+.about__features {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+.feature {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+.feature i {
+    width: 44px; height: 44px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: rgba(183, 110, 99, .12);
+    color: var(--accent-dark);
+    display: grid;
+    place-items: center;
+}
+.feature strong { display: block; margin-bottom: 4px; font-size: .98rem; }
+.feature span { color: var(--ink-soft); font-size: .86rem; line-height: 1.45; }
+
+/* ---------- Контакты ---------- */
+.contacts { background: var(--ink); color: var(--bg); }
+.contacts .section-head .eyebrow { color: #e0a79d; }
+.contacts .section-head p { color: #b8aaa2; }
+
+.contacts__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+    align-items: stretch;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .1);
+    border-radius: var(--radius);
+    padding: 36px;
+}
+
+.contact-card h3 { font-size: 1.5rem; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+.contact-card h3 i { color: #e0a79d; }
+
+.contact-row {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+}
+.contact-row:last-child { border-bottom: none; }
+.contact-row i { color: #e0a79d; width: 20px; text-align: center; margin-top: 4px; }
+.contact-row strong { display: block; font-size: .85rem; text-transform: uppercase; letter-spacing: 1.5px; color: #b8aaa2; margin-bottom: 3px; }
+.contact-row a:hover { color: #e0a79d; }
+
+.hours { list-style: none; }
+.hours li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .08);
+    font-weight: 600;
+}
+.hours li span:last-child { color: #e0a79d; }
+.hours li.today { color: #e0a79d; }
+
+.socials { display: flex; gap: 14px; margin-top: 24px; }
+.socials a {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .18);
+    display: grid;
+    place-items: center;
+    font-size: 1.2rem;
+    transition: background .25s, transform .25s;
+}
+.socials a:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-3px); }
+
+/* ---------- Подвал ---------- */
+.footer {
+    background: #241d1a;
+    color: #9b8d85;
+    padding: 28px 0;
+    font-size: .9rem;
+}
+.footer__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.footer a { color: #c9bbb3; }
+.footer a:hover { color: #e0a79d; }
+
+/* ---------- Модальное окно ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: none; /* переключается классом .open */
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.modal.open { display: flex; }
+
+.modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(36, 29, 26, .6);
+    backdrop-filter: blur(6px);
+    animation: fadeIn .25s ease;
+}
+
+.modal__box {
+    position: relative;
+    background: var(--bg);
+    border-radius: 24px;
+    width: min(460px, 100%);
+    padding: 40px;
+    box-shadow: var(--shadow-lg);
+    animation: slideUp .3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.modal__close {
+    position: absolute;
+    top: 18px; right: 18px;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(46, 38, 34, .07);
+    color: var(--ink);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background .2s, transform .2s;
+}
+.modal__close:hover { background: rgba(183, 110, 99, .2); transform: rotate(90deg); }
+
+.modal h3 { font-size: 1.6rem; margin-bottom: 8px; }
+.modal__hint { color: var(--ink-soft); font-size: .92rem; margin-bottom: 24px; }
+
+.form-group { margin-bottom: 18px; }
+.form-group label {
+    display: block;
+    font-size: .85rem;
+    font-weight: 700;
+    margin-bottom: 7px;
+    color: var(--ink);
+}
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 13px 16px;
+    border: 2px solid #e5d9d0;
+    border-radius: 12px;
+    background: #fff;
+    font-family: inherit;
+    font-size: .98rem;
+    color: var(--ink);
+    transition: border-color .2s, box-shadow .2s;
+}
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px rgba(183, 110, 99, .15);
+}
+
+.modal__submit { width: 100%; justify-content: center; margin-top: 8px; }
+.modal__privacy { margin-top: 14px; font-size: .78rem; color: var(--ink-soft); text-align: center; }
+
+/* Сообщение об успешной отправке */
+.form-success {
+    display: none;
+    text-align: center;
+    padding: 30px 0 10px;
+}
+.form-success.show { display: block; }
+.form-success i {
+    font-size: 3.4rem;
+    color: #4f9d69;
+    margin-bottom: 18px;
+}
+.form-success h4 { font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 10px; }
+.form-success p { color: var(--ink-soft); }
+
+/* ---------- Анимация появления при скролле ---------- */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ============================================================
+   АДАПТИВНОСТЬ
+   ============================================================ */
+@media (max-width: 992px) {
+    .hero__grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero__media { max-width: 520px; margin: 0 auto; }
+    .services__grid { grid-template-columns: repeat(2, 1fr); }
+    .about__grid { grid-template-columns: 1fr; gap: 48px; }
+    .about__media { max-width: 520px; margin: 0 auto; }
+    .contacts__grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 720px) {
+    section { padding: 64px 0; }
+    .nav {
+        position: fixed;
+        top: 70px; left: 0; right: 0;
+        background: var(--bg);
+        flex-direction: column;
+        padding: 24px;
+        gap: 18px;
+        border-bottom: 1px solid rgba(46, 38, 34, .08);
+        box-shadow: var(--shadow-lg);
+        transform: translateY(-130%);
+        transition: transform .35s ease;
+    }
+    .nav.open { transform: translateY(0); }
+    .burger { display: flex; }
+    .header__phone span { display: none; } /* оставляем только иконку-трубку */
+    .services__grid { grid-template-columns: 1fr; }
+    .hero { padding: 56px 0 80px; }
+    .hero__card { left: 12px; bottom: -20px; padding: 14px 18px; }
+    .about__features { grid-template-columns: 1fr; }
+    .modal__box { padding: 32px 24px; }
+}
+
+@media (max-width: 420px) {
+    .header__btn { display: none; } /* на совсем маленьких экранах кнопка в hero */
+    .hero__actions .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================= ШАПКА ================= -->
+<header class="header" id="header">
+    <div class="container header__inner">
+
+        <!-- Логотип -->
+        <a href="#" class="logo">
+            <i class="fa-solid fa-scissors"></i>
+            Подстригашка
+        </a>
+
+        <!-- Навигация (мобильная — выезжающая панель) -->
+        <nav class="nav" id="nav">
+            <a href="#services">Услуги и цены</a>
+            <a href="#about">О нас</a>
+            <a href="#contacts">Контакты</a>
+        </nav>
+
+        <!-- Контакты + кнопка записи -->
+        <div class="header__contacts">
+            <a class="header__phone" href="tel:+79990000000">
+                <i class="fa-solid fa-phone"></i>
+                <span>+7 (999) 000-00-00</span>
+            </a>
+            <button class="btn header__btn" data-modal-open>
+                <i class="fa-regular fa-calendar-check"></i> Записаться
+            </button>
+            <button class="burger" id="burger" aria-label="Меню">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- ================= ГЛАВНЫЙ ЭКРАН ================= -->
+<section class="hero">
+    <div class="container hero__grid">
+
+        <div class="hero__content">
+            <span class="hero__badge">
+                <i class="fa-solid fa-heart"></i> Ваша любимая парикмахерская
+            </span>
+            <h1>Идеальная стрижка и стиль в парикмахерской <em>«Подстригашка»</em></h1>
+            <p class="hero__sub">
+                Профессиональные мастера, уютная атмосфера и внимание к каждой детали.
+                Подчеркнём вашу красоту — от классической стрижки до сложного окрашивания.
+            </p>
+            <div class="hero__actions">
+                <button class="btn" data-modal-open>
+                    <i class="fa-regular fa-calendar-check"></i> Записаться онлайн
+                </button>
+                <a class="btn btn--ghost" href="#services">Смотреть услуги</a>
+            </div>
+
+            <div class="hero__meta">
+                <div><i class="fa-regular fa-clock"></i> Ежедневно 9:00–21:00</div>
+                <div><i class="fa-solid fa-location-dot"></i> ул. Примерная, 12</div>
+            </div>
+        </div>
+
+        <div class="hero__media">
+            <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=900&q=80"
+                 alt="Интерьер парикмахерской «Подстригашка»">
+            <div class="hero__card">
+                <div>
+                    <span class="stars">★★★★★</span>
+                    <strong>4,9 из 5</strong>
+                    <small>более 800 отзывов</small>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= УСЛУГИ И ЦЕНЫ ================= -->
+<section class="services" id="services">
+    <div class="container">
+
+        <div class="section-head reveal">
+            <div class="eyebrow">Прайс-лист</div>
+            <h2>Услуги и цены</h2>
+            <p>Честные цены без скрытых доплат. Стоимость окрашивания и наращивания уточняется на консультации с мастером.</p>
+        </div>
+
+        <div class="services__grid">
+
+            <!-- Стрижки -->
+            <article class="service-card reveal">
+                <div class="service-card__img">
+                    <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=800&q=80" alt="Мужская стрижка">
+                    <span class="service-card__price-tag">от 1 500 ₽</span>
+                </div>
+                <div class="service-card__body">
+                    <div class="service-card__icon"><i class="fa-solid fa-user"></i></div>
+                    <h3>Мужские стрижки</h3>
+                    <p>Классические и современные стрижки, стрижка машинкой и ножницами, оформление бороды и усов.</p>
+                    <div class="service-card__footer">
+                        <span class="service-card__time"><i class="fa-regular fa-clock"></i> 40–60 мин</span>
+                        <button class="service-card__link" data-modal-open data-service="Мужская стрижка">Записаться <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="service-card reveal">
+                <div class="service-card__img">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&w=800&q=80" alt="Женская стрижка">
+                    <span class="service-card__price-tag">от 2 500 ₽</span>
+                </div>
+                <div class="service-card__body">
+                    <div class="service-card__icon"><i class="fa-solid fa-user-group"></i></div>
+                    <h3>Женские стрижки</h3>
+                    <p>Стрижки любой сложности: каре, каскад, пикси, кудрявый метод. Подберём форму под ваш тип волос и лицо.</p>
+                    <div class="service-card__footer">
+                        <span class="service-card__time"><i class="fa-regular fa-clock"></i> 60–90 мин</span>
+                        <button class="service-card__link" data-modal-open data-service="Женская стрижка">Записаться <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="service-card reveal">
+                <div class="service-card__img">
+                    <img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?auto=format&fit=crop&w=800&q=80" alt="Детская стрижка">
+                    <span class="service-card__price-tag">от 1 000 ₽</span>
+                </div>
+                <div class="service-card__body">
+                    <div class="service-card__icon"><i class="fa-solid fa-child"></i></div>
+                    <h3>Детские стрижки</h3>
+                    <p>Аккуратные и быстрые стрижки для юных клиентов. Терпеливые мастера, детское кресло и мультики по желанию.</p>
+                    <div class="service-card__footer">
+                        <span class="service-card__time"><i class="fa-regular fa-clock"></i> 30–40 мин</span>
+                        <button class="service-card__link" data-modal-open data-service="Детская стрижка">Записаться <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="service-card reveal">
+                <div class="service-card__img">
+                    <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?auto=format&fit=crop&w=800&q=80" alt="Окрашивание волос">
+                    <span class="service-card__price-tag">от 3 500 ₽</span>
+                </div>
+                <div class="service-card__body">
+                    <div class="service-card__icon"><i class="fa-solid fa-palette"></i></div>
+                    <h3>Окрашивание волос</h3>
+                    <p>Окрашивание любой сложности: airtouch, балаяж, шатуш, тонирование, сложные техники. Работаем на профессиональной косметике.</p>
+                    <div class="service-card__footer">
+                        <span class="service-card__time"><i class="fa-regular fa-clock"></i> 2–4 часа</span>
+                        <button class="service-card__link" data-modal-open data-service="Окрашивание волос">Записаться <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="service-card reveal">
+                <div class="service-card__img">
+                    <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?auto=format&fit=crop&w=800&q=80" alt="Наращивание волос">
+                    <span class="service-card__price-tag">от 8 000 ₽</span>
+                </div>
+                <div class="service-card__body">
+                    <div class="service-card__icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                    <h3>Наращивание волос</h3>
+                    <p>Качественные материалы и щадящие техники: ленточное, капсульное, микрокапсульное наращивание и коррекция.</p>
+                    <div class="service-card__footer">
+                        <span class="service-card__time"><i class="fa-regular fa-clock"></i> 2–3 часа</span>
+                        <button class="service-card__link" data-modal-open data-service="Наращивание волос">Записаться <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </article>
+
+            <article class="service-card reveal">
+                <div class="service-card__img">
+                    <img src="https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=800&q=80" alt="Укладка и уход">
+                    <span class="service-card__price-tag">от 1 200 ₽</span>
+                </div>
+                <div class="service-card__body">
+                    <div class="service-card__icon"><i class="fa-solid fa-spa"></i></div>
+                    <h3>Укладка и уход</h3>
+                    <p>Праздничные и повседневные укладки, кератиновое выпрямление, восстанавливающие процедуры и уход за волосами.</p>
+                    <div class="service-card__footer">
+                        <span class="service-card__time"><i class="fa-regular fa-clock"></i> 40–80 мин</span>
+                        <button class="service-card__link" data-modal-open data-service="Укладка и уход">Записаться <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= О НАС ================= -->
+<section class="about" id="about">
+    <div class="container about__grid">
+
+        <div class="about__media reveal">
+            <img src="https://images.unsplash.com/photo-1600948836101-f9ffda59d250?auto=format&fit=crop&w=900&q=80"
+                 alt="Мастер парикмахерской «Подстригашка» за работой">
+        </div>
+
+        <div class="about__content reveal">
+            <div class="eyebrow" style="text-transform:uppercase;letter-spacing:3px;font-size:.8rem;font-weight:800;color:var(--accent);margin-bottom:12px;">О нас</div>
+            <h2>Место, где вам всегда рады</h2>
+            <p>
+                «Подстригашка» — это команда опытных мастеров, которые любят своё дело.
+                Мы постоянно учимся новым техникам, следим за трендами и подбираем
+                решения индивидуально под каждого гостя.
+            </p>
+            <p>
+                Мы позаботились обо всём, чтобы ваш визит был приятным: уютный интерьер,
+                внимательный сервис и время только для вас.
+            </p>
+
+            <div class="about__features">
+                <div class="feature">
+                    <i class="fa-solid fa-award"></i>
+                    <div><strong>Профессиональные мастера</strong><span>Стаж более 5 лет и регулярное повышение квалификации.</span></div>
+                </div>
+                <div class="feature">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <div><strong>Стерильные инструменты</strong><span>Крафт-пакеты, автоклав и дезинфекция после каждого клиента.</span></div>
+                </div>
+                <div class="feature">
+                    <i class="fa-solid fa-mug-saucer"></i>
+                    <div><strong>Чай и кофе для гостей</strong><span>Угощаем напитками и угощениями во время ожидания.</span></div>
+                </div>
+                <div class="feature">
+                    <i class="fa-solid fa-couch"></i>
+                    <div><strong>Уютная атмосфера</strong><span>Приятная музыка, мягкий свет и никакой суеты.</span></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ================= КОНТАКТЫ ================= -->
+<section class="contacts" id="contacts">
+    <div class="container">
+
+        <div class="section-head reveal">
+            <div class="eyebrow">Контакты</div>
+            <h2>Ждём вас в гости</h2>
+            <p>Работаем без выходных. Для записи звоните или оставляйте заявку на сайте.</p>
+        </div>
+
+        <div class="contacts__grid">
+
+            <!-- График работы -->
+            <div class="contact-card reveal">
+                <h3><i class="fa-regular fa-clock"></i> График работы</h3>
+                <ul class="hours">
+                    <li><span>Понедельник — Пятница</span><span>9:00 – 21:00</span></li>
+                    <li><span>Суббота</span><span>9:00 – 21:00</span></li>
+                    <li class="today"><span>Воскресенье</span><span>9:00 – 21:00</span></li>
+                </ul>
+                <p style="margin-top:18px;color:#b8aaa2;font-size:.92rem;">
+                    <i class="fa-solid fa-circle-info" style="color:#e0a79d;margin-right:6px;"></i>
+                    Возможна запись вне часов работы — по договорённости.
+                </p>
+            </div>
+
+            <!-- Адрес, телефон, соцсети -->
+            <div class="contact-card reveal">
+                <h3><i class="fa-solid fa-location-dot"></i> Как нас найти</h3>
+                <div class="contact-row">
+                    <i class="fa-solid fa-map-pin"></i>
+                    <div><strong>Адрес</strong>г. Москва, ул. Примерная, 12 <br>(вход с угла здания)</div>
+                </div>
+                <div class="contact-row">
+                    <i class="fa-solid fa-phone"></i>
+                    <div><strong>Телефон</strong><a href="tel:+79990000000">+7 (999) 000-00-00</a></div>
+                </div>
+                <div class="contact-row">
+                    <i class="fa-solid fa-envelope"></i>
+                    <div><strong>Email</strong><a href="mailto:hello@podstrigashka.ru">hello@podstrigashka.ru</a></div>
+                </div>
+                <div class="socials">
+                    <a href="#" aria-label="ВКонтакте"><i class="fa-brands fa-vk"></i></a>
+                    <a href="#" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+                    <a href="#" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ================= ПОДВАЛ ================= -->
+<footer class="footer">
+    <div class="container footer__inner">
+        <div><i class="fa-solid fa-scissors" style="color:#e0a79d;"></i> Парикмахерская «Подстригашка» © 2026</div>
+        <div><a href="tel:+79990000000">+7 (999) 000-00-00</a> · ул. Примерная, 12</div>
+    </div>
+</footer>
+
+<!-- ================= МОДАЛЬНОЕ ОКНО (онлайн-запись) ================= -->
+<div class="modal" id="bookingModal" aria-hidden="true">
+    <div class="modal__backdrop" data-modal-close></div>
+
+    <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal__close" data-modal-close aria-label="Закрыть окно">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <!-- Форма -->
+        <div id="bookingFormWrap">
+            <h3 id="modalTitle">Онлайн-запись</h3>
+            <p class="modal__hint">Оставьте заявку — мы перезвоним, чтобы подтвердить время визита.</p>
+
+            <form id="bookingForm" novalidate>
+                <div class="form-group">
+                    <label for="name">Ваше имя</label>
+                    <input type="text" id="name" name="name" placeholder="Например, Анна" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Телефон</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="service">Выберите услугу</label>
+                    <select id="service" name="service" required>
+                        <option value="" disabled selected>— Выберите из списка —</option>
+                        <option>Мужская стрижка</option>
+                        <option>Женская стрижка</option>
+                        <option>Детская стрижка</option>
+                        <option>Окрашивание волос</option>
+                        <option>Наращивание волос</option>
+                        <option>Укладка и уход</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn modal__submit">
+                    <i class="fa-regular fa-paper-plane"></i> Отправить заявку
+                </button>
+                <p class="modal__privacy">Нажимая кнопку, вы соглашаетесь с политикой обработки персональных данных.</p>
+            </form>
+        </div>
+
+        <!-- Сообщение об успехе -->
+        <div class="form-success" id="bookingSuccess">
+            <i class="fa-solid fa-circle-check"></i>
+            <h4>Заявка отправлена!</h4>
+            <p>Спасибо! Мы свяжемся с вами в ближайшее время, чтобы подтвердить запись.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+/* ============================================================
+   ПОДСТРИГАШКА — интерактивность
+   ============================================================ */
+
+(function () {
+    'use strict';
+
+    /* ---------- 1. Модальное окно записи ---------- */
+    const modal        = document.getElementById('bookingModal');
+    const formWrap     = document.getElementById('bookingFormWrap');
+    const successBlock = document.getElementById('bookingSuccess');
+    const form         = document.getElementById('bookingForm');
+    const serviceSelect = document.getElementById('service');
+
+    /** Открыть модальное окно (с опциональным выбором услуги). */
+    function openModal(service) {
+        if (service) serviceSelect.value = service;      // предвыбранная услуга из карточки
+        formWrap.style.display = 'block';
+        successBlock.classList.remove('show');
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';         // блокируем прокрутку фона
+    }
+
+    /** Закрыть модальное окно. */
+    function closeModal() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        form.reset();                                    // очищаем форму на всякий случай
+    }
+
+    // Все кнопки с атрибутом data-modal-open открывают окно
+    document.querySelectorAll('[data-modal-open]').forEach(btn => {
+        btn.addEventListener('click', () => openModal(btn.dataset.service || null));
+    });
+
+    // Закрытие по клику на подложку или крестик
+    document.querySelectorAll('[data-modal-close]').forEach(el => {
+        el.addEventListener('click', closeModal);
+    });
+
+    // Закрытие по клавише Esc
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+    });
+
+    /* ---------- 2. Простая маска телефона + валидация ---------- */
+    const phoneInput = document.getElementById('phone');
+
+    phoneInput.addEventListener('input', () => {
+        // Оставляем только цифры, обрезаем до 11 символов
+        let digits = phoneInput.value.replace(/\D/g, '');
+        if (digits.startsWith('8')) digits = '7' + digits.slice(1);
+        if (!digits.startsWith('7')) digits = '7' + digits;
+        digits = digits.slice(0, 11);
+
+        // Форматируем под +7 (___) ___-__-__
+        let result = '+7';
+        if (digits.length > 1)  result += ' (' + digits.slice(1, 4);
+        if (digits.length >= 4) result += ') ' + digits.slice(4, 7);
+        if (digits.length >= 7) result += '-' + digits.slice(7, 9);
+        if (digits.length >= 9) result += '-' + digits.slice(9, 11);
+        phoneInput.value = result;
+    });
+
+    /* ---------- 3. Отправка формы (демо-режим) ---------- */
+    form.addEventListener('submit', e => {
+        e.preventDefault(); // отменяем реальную отправку — показываем «успех»
+
+        const name = form.name.value.trim();
+        const phoneDigits = phoneInput.value.replace(/\D/g, '');
+        const service = serviceSelect.value;
+
+        if (!name || phoneDigits.length !== 11 || !service) {
+            alert('Пожалуйста, заполните все поля: имя, телефон (полностью) и услугу.');
+            return;
+        }
+
+        // Здесь обычно отправляется AJAX-запрос на сервер.
+        formWrap.style.display = 'none';
+        successBlock.classList.add('show');
+    });
+
+    /* ---------- 4. Мобильное меню (бургер) ---------- */
+    const burger = document.getElementById('burger');
+    const nav    = document.getElementById('nav');
+
+    burger.addEventListener('click', () => {
+        burger.classList.toggle('open');
+        nav.classList.toggle('open');
+    });
+
+    // Закрываем меню при клике на любой пункт навигации
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            burger.classList.remove('open');
+            nav.classList.remove('open');
+        });
+    });
+
+    /* ---------- 5. Тень шапки при прокрутке ---------- */
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => {
+        header.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+
+    /* ---------- 6. Анимация появления блоков при скролле ---------- */
+    const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target); // анимируем один раз
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+})();
+</script>
+
+</body>
+</html>
